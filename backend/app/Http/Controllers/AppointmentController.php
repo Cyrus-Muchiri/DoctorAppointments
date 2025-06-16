@@ -8,9 +8,11 @@ use App\Models\AppointmentRequest;
 use Illuminate\Http\Request;
 use App\Events\AppointmentStatusChanged;
 use App\Notifications\AppointmentStatusNotification;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AppointmentController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -33,9 +35,7 @@ class AppointmentController extends Controller
     {
         $data = $request->validated();
         $user = $request->user();
-        if ($user->role !== 'patient') {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
+        $this->authorize('create', AppointmentRequest::class);
 
         $appointmentRequest = $user->sentRequests()->create($data);
 

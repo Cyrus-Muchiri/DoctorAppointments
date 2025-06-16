@@ -41,12 +41,9 @@ class AppointmentRequestPolicy
         return $user->role === 'doctor' && $user->id === $appointmentRequest->doctor_id;
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, AppointmentRequest $appointmentRequest): bool
+   public function delete(User $user, AppointmentRequest $appointmentRequest): bool
     {
-        return false;
+        return $user->role === 'patient' && $user->id === $appointmentRequest->patient_id && $appointmentRequest->status === 'pending';
     }
 
     /**

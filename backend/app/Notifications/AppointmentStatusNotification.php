@@ -39,13 +39,12 @@ class AppointmentStatusNotification extends Notification implements ShouldQueue
 
         /**
      * Get the mail representation of the notification.
-     */
-    public function toMail(object $notifiable): MailMessage
+     */public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+                    ->line('Your appointment status has been updated.')
+                    ->action('View Appointment', url('/appointments/' . $this->appointment->id))
+                    ->line('Thank you for using our application!');
     }
 
 

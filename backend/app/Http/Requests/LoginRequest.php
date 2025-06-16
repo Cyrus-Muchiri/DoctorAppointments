@@ -4,14 +4,15 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAppointmentRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user() !==null;
+        // This request is always authorized, as it is for login
+        return true;
     }
 
     /**
@@ -22,7 +23,8 @@ class StoreAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
         ];
     }
 }
