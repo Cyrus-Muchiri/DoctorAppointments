@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class AppointmentRequest extends Model
 {
+    protected $fillable = [
+        'patient_id',
+        'doctor_id',
+        'preferred_date',
+        'status',
+        'remarks',
+    ];
 
     public function patient()
     {
