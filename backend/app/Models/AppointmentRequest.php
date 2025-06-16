@@ -12,6 +12,7 @@ class AppointmentRequest extends Model
         'preferred_date',
         'status',
         'remarks',
+        'reason'
     ];
 
     public function patient()

@@ -21,6 +21,7 @@ class AppointmentRequestPolicy
      */
     public function view(User $user, AppointmentRequest $appointmentRequest): bool
     {
+       
         return $user->id === $appointmentRequest->patient_id
             || $user->id === $appointmentRequest->doctor_id;
     }
@@ -38,7 +39,7 @@ class AppointmentRequestPolicy
      */
     public function update(User $user, AppointmentRequest $appointmentRequest): bool
     {
-        return $user->role === 'doctor' && $user->id === $appointmentRequest->doctor_id;
+        return $user->role === 'doctor' ;
     }
 
    public function delete(User $user, AppointmentRequest $appointmentRequest): bool

@@ -37,6 +37,7 @@ class AppointmentController extends Controller
         $user = $request->user();
         $this->authorize('create', AppointmentRequest::class);
 
+
         $appointmentRequest = $user->sentRequests()->create($data);
 
         return response()->json($appointmentRequest, 201);
@@ -58,7 +59,9 @@ class AppointmentController extends Controller
     public function update(UpdateAppointmentRequest $request, AppointmentRequest $appointment)
     {
         $this->authorize('update', $appointment);
-        $appointment->update($request->validated());
+        $data= $request->validated();
+        $data['doctor_id'] = $request->user()->id;
+        $appointment->update($data);
         // broadcast + notify patient
         broadcast(new AppointmentStatusChanged($appointment))->toOthers();
         $appointment->patient->notify(new AppointmentStatusNotification($appointment));

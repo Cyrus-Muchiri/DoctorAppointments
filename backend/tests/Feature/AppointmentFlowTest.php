@@ -46,9 +46,9 @@ public function test_patient_can_create_and_doctor_can_update_appointment(): voi
 
         $this->assertDatabaseHas('appointment_requests', [
             'patient_id' => $patient->id,
-            'doctor_id' => $doctor->id,
             'status' => 'pending', // Default status after creation
             'reason' => 'Need consultation',
+            'preferred_date' => now()->addDays(2)->toDateString(),
         ]);
 
         // Doctor approves the appointment

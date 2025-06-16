@@ -22,6 +22,8 @@ class StoreAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            "reason" => "required|string|max:255",
+            "preferred_date" => "required|date|after_or_equal:today",
             
         ];
     }

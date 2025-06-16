@@ -22,7 +22,9 @@ class UpdateAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'status' => 'required|in:approved,rejected,cancelled',
+            'remarks' => 'nullable|string|max:255',
+            'preferred_date' => 'nullable|date|after_or_equal:today', 
         ];
     }
 }

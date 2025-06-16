@@ -31,6 +31,7 @@ class AppointmentPolicyTest extends TestCase
     public function test_user_cannot_view_others_appointment()
     {
         $user = new User(['id' => 3, 'role' => 'patient']);
+        
         $appointment = new AppointmentRequest(['patient_id' => 1]);
 
         $policy = new AppointmentRequestPolicy();
