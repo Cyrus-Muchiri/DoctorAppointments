@@ -1,6 +1,6 @@
-# 🏥 Health Appointment Request System
+# Health Appointment Request System
 
-A mini full-stack appointment request system built with **Laravel 10 (API)** and **Vue 3 + Vite + Tailwind CSS (SPA)**.
+A mini full-stack appointment request system built with **Laravel 12 (API)** and **Vue 3 + Vite + Tailwind CSS (SPA)**.
 
 Patients can request health appointments. Doctors can view, approve, or reject them. The system supports authentication, role-based views, validation, and authorization.
 
@@ -9,7 +9,7 @@ Patients can request health appointments. Doctors can view, approve, or reject t
 ## 🚀 Tech Stack
 
 ### Backend
-- Laravel 10
+- Laravel 12
 - Sanctum (for API authentication)
 - MySQL
 - Laravel Policies
@@ -26,14 +26,11 @@ Patients can request health appointments. Doctors can view, approve, or reject t
 
 ---
 
-## 🛠️ Local Setup Instructions
+##  Local Setup Instructions
 
 ### Prerequisites
-- PHP 8.2+
-- Composer
-- Node.js (v16+)
-- MySQL or SQLite
-- [Pusher account](https://pusher.com/) (optional, for real-time)
+- Docker
+- Node
 
 ---
 
@@ -41,44 +38,27 @@ Patients can request health appointments. Doctors can view, approve, or reject t
 
 1. **Clone the repo & move into backend folder**
 ```bash
-git clone https://github.com/your-username/health-appointment-system.git
-cd health-appointment-system/backend
+git clone https://github.com/Cyrus-Muchiri/DoctorAppointments.git
+
+cd DoctorAppointments/backend
 ```
 
-2. **Install dependencies**
-```bash
-composer install
-```
 
-3. **Setup environment**
+2. **Setup environment**
 ```bash
 cp .env.example .env
-php artisan key:generate
 ```
 
-4. **Configure DB in `.env`**
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=appointment_db
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-5. **Run migrations**
+3. **Spin up Backend Container and DB container**
 ```bash
-php artisan migrate
+
+docker-compose up --build -d
 ```
 
-6. **Run the API**
-```bash
-php artisan serve
-```
 
 ---
 
-### 🌐 Frontend (Vue 3 SPA)
+###  Frontend (Vue 3 SPA)
 
 1. **Navigate to frontend folder**
 ```bash
@@ -95,19 +75,17 @@ npm install
 npm run dev
 ```
 
-> Make sure the backend is running on `http://127.0.0.1:8000`. Update Axios base URL if needed.
-
 ---
 
-## 🔐 Authentication
+##  Authentication
 
 - Uses Laravel Sanctum
 - Register/Login via API
-- Stores token in localStorage
+- Stores token in session storage
 
 ---
 
-## 🔄 API Endpoints
+##  API Endpoints
 
 ### Auth Routes (Sanctum)
 | Method | Endpoint | Description |
@@ -126,7 +104,7 @@ npm run dev
 
 ---
 
-## 👤 Roles
+##  Roles
 
 - **Patient**
   - Can submit appointment requests
@@ -138,7 +116,7 @@ npm run dev
 
 ---
 
-## 🧪 Tests (Bonus)
+##  Tests (Bonus)
 
 To run feature tests (optional):
 
@@ -150,40 +128,32 @@ php artisan test
 
 ---
 
-## 🔔 Notifications (Bonus)
+##  Notifications (Bonus)
 
 - Patients are notified via Laravel Notifications when a doctor responds.
 
 ---
 
-## 📡 Real-Time Updates (Bonus)
+## Real-Time Updates (Bonus)
 
-- Patients receive real-time status updates using Laravel Echo and Pusher.
-- To enable:
-  - Create a free [Pusher](https://pusher.com/) account
-  - Configure `.env`:
-
-```env
-PUSHER_APP_ID=your-app-id
-PUSHER_APP_KEY=your-app-key
-PUSHER_APP_SECRET=your-app-secret
-PUSHER_APP_CLUSTER=your-cluster
-```
+- Not done. Focus was on Backend / UI and functionality
 
 ---
 
-## 👥 Test Users
+##  Test Users
+
+
 
 | Role    | Email               | Password  |
 |---------|---------------------|-----------|
-| Patient | patient@example.com | password  |
-| Doctor  | doctor@example.com  | password  |
+| Patient | test@example.com    | password123  |
+| Doctor  | testdoctor@example.com  | password  |
 
-> You can seed these manually or register via the frontend.
+
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```bash
 health-appointment-system/
@@ -191,15 +161,19 @@ health-appointment-system/
 │   ├── app/
 │   ├── database/
 │   └── routes/api.php
+│   └── Dockerfile
 ├── frontend/      # Vue 3 SPA
 │   ├── src/
 │   └── vite.config.js
-└── README.md
+├── db/      # has db dump for mysql init
+│   ├── db-dump.sql
+|── README.md
+└── docker-compose.yml
 ```
 
 ---
 
-## ❗ Known Limitations
+## Known Limitations
 
 - No email verification or password reset
 - No calendar/scheduling conflict checks
@@ -207,12 +181,12 @@ health-appointment-system/
 
 ---
 
-## 📄 License
+##  License
 
 This project is open for demonstration and assessment purposes.
 
 ---
 
-## 🙌 Author
+## Author
 
 Built by **Cyrus Muchiri** for a technical assessment.
