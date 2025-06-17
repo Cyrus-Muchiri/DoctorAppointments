@@ -51,6 +51,7 @@ function logout() {
       console.log('Logout response:', response)
       toast.success('Logout successful!')
       router.push('/login')
+      return
 
     })
 

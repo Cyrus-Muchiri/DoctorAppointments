@@ -6,7 +6,7 @@ Patients can request health appointments. Doctors can view, approve, or reject t
 
 ---
 
-## 🚀 Tech Stack
+##  Tech Stack
 
 ### Backend
 - Laravel 12
@@ -186,6 +186,26 @@ health-appointment-system/
 This project is open for demonstration and assessment purposes.
 
 ---
+
+## Screen Shots
+
+### Login Screen
+![Login](screenshots/LoginScreen.png)
+
+
+### Patients Dashboard
+![Patients Dashboard](screenshots/PatientsDashboard.png)
+
+### Patients Create Appointment
+![Patients Dashboard](screenshots/PatientBookAppointment.png)
+
+### Doctors Dashboard
+![Doctors Dashboard](screenshots/DoctorsAppointments.png)
+
+### Doctors Update Appointment Status
+![Patients Dashboard](screenshots/DoctorUpdateAppointment.png)
+
+
 
 ## Author
 

@@ -81,7 +81,7 @@ const submitForm = () => {
   })
   .then(response => {
     toast.success('Appointment booked successfully!')
-    router.push('/patients/appointments') // Redirect to appointments page
+    router.push('/patients/dashboard') 
   })
   .catch(error => {
     console.error('Error booking appointment:', error)
