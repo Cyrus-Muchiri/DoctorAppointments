@@ -29,8 +29,10 @@ Patients can request health appointments. Doctors can view, approve, or reject t
 ##  Local Setup Instructions
 
 ### Prerequisites
-- Docker
-- Node
+- PHP 8.2+
+- Composer
+- Node.js (v16+)
+- MySQL
 
 ---
 
@@ -44,15 +46,29 @@ cd DoctorAppointments/backend
 ```
 
 
-2. **Setup environment**
+2. **Install Dependencies and Setup environment **
 ```bash
+composer install
 cp .env.example .env
 ```
 
-3. **Spin up Backend Container and DB container**
-```bash
+3. **Add db credentials**
+```env
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=appointments
+DB_USERNAME=root
+DB_PASSWORD=root
+```
 
-docker-compose up --build -d
+4. **Laravel setup**
+
+```bash
+php artisan key:generate
+php artisan migrate --seed
+php artisan serve --port=8081
+
 ```
 
 
@@ -161,14 +177,12 @@ health-appointment-system/
 │   ├── app/
 │   ├── database/
 │   └── routes/api.php
-│   └── Dockerfile
 ├── frontend/      # Vue 3 SPA
 │   ├── src/
 │   └── vite.config.js
 ├── db/      # has db dump for mysql init
 │   ├── db-dump.sql
 |── README.md
-└── docker-compose.yml
 ```
 
 ---
@@ -177,7 +191,7 @@ health-appointment-system/
 
 - No email verification or password reset
 - No calendar/scheduling conflict checks
-- Real-time updates are optional and may require config tweaks
+- Real-time updates not configured fully
 
 ---
 
