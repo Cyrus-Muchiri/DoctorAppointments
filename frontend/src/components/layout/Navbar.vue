@@ -50,16 +50,10 @@ function logout() {
       sessionStorage.removeItem('user')
       console.log('Logout response:', response)
       toast.success('Logout successful!')
-      router.push('/login')
+      router.push('/')
       return
 
     })
 
-
-
-  // Perform logout logic here, e.g., clear auth tokens
-  console.log('Logging out...')
-  // Redirect to login page
-  router.push('/login')
 }
 </script>

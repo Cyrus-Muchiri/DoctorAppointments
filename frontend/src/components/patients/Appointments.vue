@@ -55,7 +55,7 @@ async function fetchAppointments() {
     const token = sessionStorage.getItem('token');
     if (!token) {
       console.error('No authentication token found');
-      router.push('/login'); // Redirect to login if no token
+      router.push('/'); // Redirect to login if no token
       return;
     }
 

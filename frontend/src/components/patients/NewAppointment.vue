@@ -65,7 +65,7 @@ const submitForm = () => {
   if (!token) {
     console.error('No authentication token found')
     toast.error('You must be logged in to book an appointment.')
-    router.push('/login') 
+    router.push('/') 
     submitting.value = false
     return
   }

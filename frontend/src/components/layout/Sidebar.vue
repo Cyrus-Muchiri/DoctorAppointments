@@ -20,7 +20,7 @@ const isOpen = ref(true)
 const user = JSON.parse(sessionStorage.getItem('user') || '{}')
 if (!user || !user.role) {
   console.error('User not found or role is missing in sessionStorage')
-  router.push('/login')
+  router.push('/')
 }
 
 
@@ -38,7 +38,7 @@ if (user.role === 'doctor') {
   ]
 } else {
   console.error('Unknown user role:', user.role)
-  router.push('/login')
+  router.push('/')
 }
 
 </script>

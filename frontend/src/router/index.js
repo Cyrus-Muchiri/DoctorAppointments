@@ -9,12 +9,6 @@ const routes = [
     component: import('../views/authentication/Loginview.vue'),
   },
 
-    {
-    path: '/login',
-    name: 'Login',
-    component: import('../views/authentication/Loginview.vue'),
-  },
-
   {
     path: '/doctors/dashboard',
     name: 'DoctorDashboard',
@@ -61,12 +55,12 @@ router.beforeEach((to, from, next) => {
 
   if (to.meta.requiresAuth) {
     if (!token) {
-      return next('/login')
+      return next('/')
     }
 
     if (to.meta.roles && !to.meta.roles.includes(user.role)) {
 
-      return next('/login') //todo : use unauthorized view
+      return next('/') //todo : use unauthorized view
     }
   }
 

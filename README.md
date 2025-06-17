@@ -34,7 +34,7 @@ Patients can request health appointments. Doctors can view, approve, or reject t
 
 ---
 
-### 🔧 Backend (Laravel API)
+### Backend (Laravel API)
 
 1. **Clone the repo & move into backend folder**
 ```bash
@@ -147,7 +147,7 @@ php artisan test
 | Role    | Email               | Password  |
 |---------|---------------------|-----------|
 | Patient | test@example.com    | password123  |
-| Doctor  | testdoctor@example.com  | password  |
+| Doctor  | testdoctor@example.com  | password123  |
 
 
 
