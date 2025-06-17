@@ -26,13 +26,60 @@
 
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+import { API_URL } from '../../env'
+import { useToast } from 'vue-toastification'
+const router = useRouter()
+const toast = useToast()
+
 
 const email = ref('')
 const password = ref('')
-const remember = ref(false)
 
-function handleLogin() {
-  console.log('Login clicked', { email: email.value, password: password.value, remember: remember.value })
+async function handleLogin() {
+  console.log('Login clicked', { email: email.value, password: password.value })
+  axios.post(API_URL + '/login', {
+    email: email.value,
+    password: password.value
+  })
+    .then(response => {
+      sessionStorage.setItem('token', response.data.token)
+      sessionStorage.setItem('user', JSON.stringify(response.data.user))
+      toast.success('Login successful!')
+
+      if (response.data.user.role === 'doctor') {
+        router.push('/doctors/dashboard')
+      } else if (response.data.user.role === 'patient') {
+        router.push('/patients/dashboard')
+      } else {
+        console.error('Unknown user role:', response.data.user.role)
+      }
+    })
+    .catch(error => {
+      console.error('Login error:', error)
+      toast.error('Login failed. Please check your credentials.')
+    })
+
+
+
+
+
+
+
 }
+
+onMounted(() => {
+  const user = JSON.parse(sessionStorage.getItem('user') || '{}')
+  if (user && user.role) {
+    if (user.role === 'doctor') {
+      router.push('/doctors/dashboard')
+    } else if (user.role === 'patient') {
+      router.push('/patients/dashboard')
+    }
+  }
+})
+
+
 </script>

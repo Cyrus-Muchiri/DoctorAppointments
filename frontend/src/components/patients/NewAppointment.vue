@@ -1,27 +1,4 @@
-<script setup>
-import { ref } from 'vue'
 
-const appointmentDate = ref('')
-const reason = ref('')
-const submitting = ref(false)
-
-const submitForm = () => {
-  if (!appointmentDate.value || !reason.value) {
-    alert('Please fill in both fields.')
-    return
-  }
-
-  submitting.value = true
-
-  // Simulate API call
-  setTimeout(() => {
-    alert(`Appointment booked on ${appointmentDate.value} for "${reason.value}"`)
-    submitting.value = false
-    appointmentDate.value = ''
-    reason.value = ''
-  }, 1500)
-}
-</script>
 
 <template>
   <div class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md">
@@ -62,3 +39,62 @@ const submitForm = () => {
     </form>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
+import axios from 'axios'
+import { API_URL } from '../../env'
+
+const router = useRouter()
+const toast = useToast()
+
+const appointmentDate = ref('')
+const reason = ref('')
+const submitting = ref(false)
+
+const submitForm = () => {
+  if (!appointmentDate.value || !reason.value) {
+    alert('Please fill in both fields.')
+    return
+  }
+
+  submitting.value = true
+  const token = sessionStorage.getItem('token')
+  if (!token) {
+    console.error('No authentication token found')
+    toast.error('You must be logged in to book an appointment.')
+    router.push('/login') 
+    submitting.value = false
+    return
+  }
+
+  axios.post(`${API_URL}/appointments`, {
+    preferred_date: appointmentDate.value,
+    reason: reason.value
+  }, {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  })
+  .then(response => {
+    toast.success('Appointment booked successfully!')
+    router.push('/patients/appointments') // Redirect to appointments page
+  })
+  .catch(error => {
+    console.error('Error booking appointment:', error)
+    toast.error('Failed to book appointment. Please try again.')
+  })
+  .finally(() => {
+    submitting.value = false
+    appointmentDate.value = ''
+    reason.value = ''
+  })
+
+
+
+  
+}
+</script>

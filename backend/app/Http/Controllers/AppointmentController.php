@@ -22,7 +22,8 @@ class AppointmentController extends Controller
         if ($user->role === 'patient') {
             return $user->sentRequests()->latest()->paginate();
         } elseif ($user->role === 'doctor') {
-            return $user->receivedRequests()->latest()->paginate();
+            return AppointmentRequest::latest()
+                ->paginate();
         } else {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
