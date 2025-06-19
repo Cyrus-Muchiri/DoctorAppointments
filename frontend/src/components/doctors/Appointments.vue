@@ -187,11 +187,8 @@ async function changeStatus() {
   })
     .then(response => {
       toast.success('Appointment updated successfully!')
-      modal.classList.add('hidden');
-      backdrop.classList.add('hidden');
-      fetchAppointments()
+      
       return
-      // router.push('/doctors/appointments') // Redirect to appointments page
     })
     .catch(error => {
       console.error('Error updating appointment:', error)
@@ -199,7 +196,6 @@ async function changeStatus() {
       return
     })
     .finally(() => {
-      editiedAppointment.value = {}
     })
 
 }
